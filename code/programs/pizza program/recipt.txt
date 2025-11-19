@@ -1,0 +1,12 @@
+===================
+Pizza Shop
+===================
+Name: jeff
+Address: KTGFU
+Phone: 07692167420
+Delivery: no     
+small pizza: £3.25
+1 toppings: £0.75
+small pizza: £3.25
+1 toppings: £0.75
+TOTAL PRICE: £8.0

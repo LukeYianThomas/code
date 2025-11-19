@@ -1,0 +1,33 @@
+INITIALISE Constants
+
+DEF gradeCheck(mark)
+	SET studentGrade = mark//10
+	IF studentGrade = 0
+		SET studentGrade = "U"
+	IF studentGrade = 10
+		SET studentGrade = 10
+	return studentGrade
+
+READ studentCount
+REPEAT
+	IF 0<=studentCount<=20
+		ENDREPEAT
+	ELSE
+		PRINT "Invalid Data"
+		READ studentCount
+
+REPEAT for studentCount
+	READ studentName
+	ADD studentName TO nameList
+	READ studentMark
+	REPEAT
+	IF 0<=studentMark<=100
+		ENDREPEAT
+	ELSE
+		PRINT "Invalid Data"
+		READ studentMark
+	ADD studentMark TO markList
+REPEAT for studentCount
+	PRINT nameList[i]
+	PRINT "Grade: "
+	PRINT gradeCheck(markList[i])

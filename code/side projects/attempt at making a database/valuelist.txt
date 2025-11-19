@@ -1,0 +1,4 @@
+item1,3t4,4t5, please note that the format is [item name . value in rares . demand . placeholder]
+item2,3,6, also use a t to represent a non intiger value e.g 3-4 or 5-6 demand and everything has to be lowercase
+item3,6,3, lobster
+item4,3,3, shrimp
