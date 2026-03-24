@@ -1,0 +1,82 @@
+from datetime import date
+
+sales_list = [] # () -> []
+
+def get_id():
+    flag = True
+    while flag:
+        employee_ID = input("Please enter the employee ID number: ")
+        if len(employee_ID) != 8 and employee_ID.isdigit(): # == -> !=
+            print ("ID must be 8 digits long. Please try again.")
+        else:
+            print("ID number accepted")
+            return employee_ID
+          
+
+def get_car_sales():
+    flag = True
+    while flag: # can just be while True:
+        num_cars = input("Please enter the number of cars sold: ")
+        if num_cars.isdigit() == True:# redundant , == True isnt needed
+            num_cars = int(num_cars)
+            flag = False # redundant just use while True and remove this
+        else:
+            print("Input can only be a number. Please try again.")
+
+    for i in range(num_cars):
+        try:
+            car_value = float(input("Please enter the value of car number {}. £".format(i + 1)))
+        except ValueError:
+            print("Please enter a valid number")
+        sales_list.append(car_value)
+    
+def calc_total():
+    total = 0
+    for i in sales_list:
+        total += i # total = i -> total += i
+    
+    return total
+
+def calc_bonus(total):
+    
+    if len(sales_list) >= 6: # > -> >=
+        bonus = 500
+    else:
+        bonus = 0    
+     
+    if total >= 135000:
+        bonus = bonus + (total * 0.04) # 0.4 -> 0.04
+    else:
+        bonus = bonus
+    
+    return bonus
+
+print("Welcome to Versere Cars commission calculation tool. ")
+name = input("Please enter employee name: ")
+id = get_id()
+get_car_sales()
+total_value = calc_total() # calc_totol() -> calc_total()
+commission = total_value * 0.05
+bonus = calc_bonus(total_value)
+today = date.today()
+
+print("##############################")
+print("########## Summary ##########")
+print('')
+print("Name: {}".format(name))
+print("ID number:")
+print("Total value of sales: £{}".format(total_value))
+print("Commission earned: £{}".format(commission))
+print("Bonus earned: £{}".format(bonus))
+print("Date: {}".format(today))
+
+
+
+with open('sales_summaries.txt', 'a') as sales: # saes -> sales
+    sales.write("Name: {}\n".format(name))
+    sales.write("ID number: {}\n".format(id))
+    sales.write("Total value of sales: £{}\n".format(total_value))
+    sales.write("Commission earned: £{}\n".format(commission))
+    sales.write("Bonus earned: £{}\n".format(bonus))
+    sales.write("Date: {}\n".format(today))
+    sales.write("##################\n")

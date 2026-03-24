@@ -1,0 +1,21 @@
+Name: a
+ID number: 12345678
+Total value of sales: £20
+Commission earned: £1.0
+Bonus earned: £0
+Date: 2026-01-06
+##################
+Name: a
+ID number: 12345678
+Total value of sales: £40.0
+Commission earned: £2.0
+Bonus earned: £0
+Date: 2026-01-06
+##################
+Name: apple
+ID number: 12345678
+Total value of sales: £869.0
+Commission earned: £43.45
+Bonus earned: £500
+Date: 2026-01-12
+##################

@@ -1,0 +1,41 @@
+import pandas as pd
+
+SET df = pd.read_csv("Task3_data.csv")
+
+#----------FUNCTIONS----------
+FUNCTION sales_details
+	DISPLAY general sales statistics
+	DISPLAY Total Sales Value
+	DISPLAY Average Sales Value
+	DISPLAY Most Expensive Sale
+	DISPLAY Least Expensive Sale
+
+FUNCTION sales_by_person
+	DISPLAY cars sold and total value per salesperson
+
+FUNCTION cars_by_model_summary
+	DISPLAY total sales income grouped by car model
+
+FUNCTION search_by_model  
+	DISPLAY specific records for a car model
+
+WHILE True
+	CALL show_menu
+	PROMPT user for menu choice
+
+	IF choice = 1 THEN
+		CALL sales_details
+	ELSE IF choice = 2 THEN
+		CALL sales_by_person
+	ELSE IF choice = 3 THEN
+		CALL cars_by_model_summary
+	ELSE IF choice = 4 THEN
+		CALL search_by_model
+	ELSE IF choice = 5 THEN
+		DISPLAY "Goodbye"
+		EXIT LOOP
+	ELSE
+		DISPLAY "Invalid choice"
+	END IF
+END WHILE
+	

@@ -1,0 +1,96 @@
+START
+
+SET SMALL_COST = 3.25
+SET MEDIUM_COST = 5.50
+SET LARGE_COST = 7.15
+
+SET EXTRA_TOPPING1 = 0.75
+SET EXTRA_TOPPING2 = 1.35
+SET EXTRA_TOPPING3 = 2.00
+SET EXTRA_TOPPING4_OR_MORE = 2.50
+
+DISCOUNT_RATE = 0.1
+
+DELIVERY_CHARGE = 2.50
+
+FUNCTION customerDetails():
+	READ name
+	READ ADDRESS
+	READ phoneNumber
+	RETURN name,address,phonenumber
+
+FUNCTION validate_quantity_range(qty):
+	WHILE NOT 0 < QTY <= 6
+		OUTPUT "Not in range, please re-enter number of pizzas."
+		SET qty = input("Enter your number of pizzas from 1-6: ")
+
+FUNCTION setBaseCost(size):
+	IF size = "Small":
+		SET bCost = SMALL_COST
+	ELIF size = "Medium":
+		SET bCost = MEDIUM_COST
+	ELIF size = "Large":
+		SET bCost = LARGE_COST
+	ELSE:
+		OUTPUT "Invalid size entered. Defaulting to Medium."
+		bCost = MEDIUM_COST
+	RETURN bCost
+
+FUNCTION setToppingsCost(nToppings):
+	IF nToppings = 1:
+		toppingsCost = EXTRA_TOPPING1
+	ELIF nToppings = 2:
+		toppingsCost = EXTRA_TOPPING2
+	ELIF nToppings = 3:
+		toppingsCost = EXTRA_TOPPING3
+	ELIF nToppings >= 4:
+		toppingsCost = EXTRA_TOPPING4_OR_MORE
+	ELSE:
+		toppingsCost = 0
+	RETURN toppingsCost
+
+FUNCTION orderSummary(name,address,phoneNumber,ttlCost,discount,delvryCost,finalTotal):
+	OUTPUT --- Order Summary ---
+	OUTPUT "Customer Name: " name
+	OUTPUT "Address: " address
+	OUTPUT "Phone Number: " phoneNumber
+	OUTPUT "Subtotal: " ttlCost.2f
+	OUTPUT "Discount: £" discount.2f
+	OUTPUT "Delivery Charge: £" delvryCost.2f 
+	OUTPUT "Total to Pay: £" finalTotal.2f
+	OUTPUT "----------------------"
+
+SET custName, custAddress, custPhoneNumber = customerDetails()
+SET quantity = int(input("Enter your number of pizzas from 1-6: "))
+SET quantity = validate_quantity_range(quantity)
+
+SET totalCost = 0
+
+FOR I in range(quantity):
+	OUTPUT "Pizza" I
+	SET pizzaSize = input("Enter size (Small/Medium/Large): ").capitalize()
+	SET baseCost = setBaseCost(pizzaSize)
+	
+	SET numToppings = int(input("Enter number of toppings: "))
+	SET toppingsCost = setToppingsCost(numToppings)
+
+	SET pizzaCost = baseCost + toppingsCost
+	SET totalCost = totalCost + pizzaCost
+
+SET discount = 0
+IF totalCost >= 20:
+	SET discountValue = totalCost * DISCOUNT_RATE
+
+SET deliveryCost = 0
+SET delivery = input("Delivery required? (Yes/No): ").capitalize()
+IF delivery = "Yes":
+	deliveryCost = DELIVERY_CHARGE
+	
+SET finalPrice =  totalCost + deliveryCost - discountValue
+
+orderSummary(custName, custAddress, custPhoneNumber, totalCost, discountValue,deliveryCost, finalPrice)
+
+END
+
+
+
